@@ -1,28 +1,9 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 import fetch from "node-fetch";
+import { ProductTb, Body } from "./models";
 
 const url = "https://apis.haravan.com/com/products.json";
-
-interface Variant {
-    price: number;
-}
-
-interface Product {
-    id: number,
-    product_type: string,
-    variants: Variant[]
-}
-
-interface Body {
-    products: Product[],
-}
-
-interface ProductTb {
-    id: number,
-    cat: string,
-    price: number,
-}
 
 export const loadProduct = (db: admin.firestore.Firestore) => functions.https.onRequest(async (req, res) => {
     const access_token = req.query['access_tk'];
